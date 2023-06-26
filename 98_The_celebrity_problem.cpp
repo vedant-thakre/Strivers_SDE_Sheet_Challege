@@ -17,6 +17,5 @@ vector<int> findSpans(vector<int> &price) {
         
         st.push(i);
     }
-
     return ans;
 }
