@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-
 void connectNodes(BinaryTreeNode<int> *root) {
   if (!root)
     return;
