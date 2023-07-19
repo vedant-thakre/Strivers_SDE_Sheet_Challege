@@ -16,7 +16,6 @@ void bfs(vector<vector<int>>& adj,vector<int>& vis,int s,vector<int>&ans){
        }
    }
 }
-
 vector<int> BFS(int v, vector<pair<int, int>> e){
 
     // Write your code here
