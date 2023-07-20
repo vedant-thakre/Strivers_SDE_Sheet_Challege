@@ -6,7 +6,6 @@ int compareVersions(string a, string b)
     while(i < n or j < m) {
         if(a[i] == '0') 
             while(i < n and a[i] == '0') i++;
-
         if(b[j] == '0')
             while(j < m and b[j] == '0') j++;
 
