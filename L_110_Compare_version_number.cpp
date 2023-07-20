@@ -20,7 +20,6 @@ int compareVersions(string a, string b)
 
         if(num1 > num2) return 1;
         else if(num1 < num2) return -1;
-
         i++, j++;
     }
 
