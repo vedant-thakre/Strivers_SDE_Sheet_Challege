@@ -62,4 +62,4 @@ int kruskalMST(int n, int m, vector<vector<int>> &graph) {
 
 	}
 	return ans;
-}
+}N
