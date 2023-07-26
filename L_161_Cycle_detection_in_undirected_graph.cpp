@@ -1,78 +1,104 @@
-#include<queue>
+#include<bits/stdc++.h>
 
-int detectCycleInDirectedGraph(int n, vector < pair < int, int >> & edges) {
+ 
 
-  // Write your code here.
+using namespace std;
 
-  int indeg[n+1]={0};
+ 
 
-  vector<int>adjl[n+1];
+bool iscyclicbfs(int src, unordered_map<int, bool> &visited, unordered_map<int, list<int>> &adj) {
 
-  for(int i=0;i<edges.size();i++){
+    unordered_map<int, int> parent;
 
-    int u=edges[i].first;
+ 
 
-    int v=edges[i].second;
+    parent[src] = -1;
 
-    adjl[u].push_back(v);
+    visited[src] = true;
 
-  }
+    queue<int> q;
 
-  for(int i=1;i<=n;i++){
+    q.push(src);
 
-    for(auto x:adjl[i]){
+ 
 
-      indeg[x]++;
+    while (!q.empty()) {
 
-    }
+        int front = q.front();
 
-  }
+        q.pop();
 
-  queue<int>q;
+ 
 
-  for(int i=1;i<=n;i++){
+        for (auto neighbour : adj[front]) {
 
-    if(indeg[i]==0){
+            if (visited[neighbour] && neighbour != parent[front]) {
 
-      q.push(i);
+                return true; // Cycle detected
 
-    }
+            } else if (!visited[neighbour]) {
 
-  }
+                q.push(neighbour);
 
-  int count=0;
+                visited[neighbour] = true;
 
-  while(!q.empty()){
+                parent[neighbour] = front;
 
-    int node=q.front();
+            }
 
-    q.pop();
-
-    count++;
-
-    for(auto x:adjl[node]){
-
-      indeg[x]--;
-
-      if(indeg[x]==0){
-
-        q.push(x);
-
-      }
+        }
 
     }
 
-    
-
-  }
-
-  if(count==n){
-
-    return false;
-
-  }
-
-  return true;
+    return false; // No cycle detected
 
 }
+
+ 
+
+string cycleDetection(vector<vector<int>>& edges, int n, int m) {
+
+    // Create adjacency list
+
+    unordered_map<int, list<int>> adj;
+
+    for (int i = 0; i < m; i++) {
+
+        int u = edges[i][0];
+
+        int v = edges[i][1];
+
+ 
+
+        adj[u].push_back(v);
+
+        adj[v].push_back(u);
+
+    }
+
+ 
+
+    unordered_map<int, bool> visited;
+
+    for (int i = 0; i < n; i++) {
+
+        if (!visited[i]) {
+
+            bool ans = iscyclicbfs(i, visited, adj);
+
+            if (ans) {
+
+                return "Yes"; // Cycle detected
+
+            }
+
+        }
+
+    }
+
+    return "No"; // No cycle detected
+
+}
+
+ 
 
